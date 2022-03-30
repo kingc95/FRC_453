@@ -80,6 +80,8 @@ public class Constants {
         public static boolean kReverseEncoder = true;
         public static int kLowBarTicks = 16342;
         public static int kMedBarTicks = 31717;
+
+        public static int kAllianceSend = 5;
     }
 
     public static final class LifterConstants{

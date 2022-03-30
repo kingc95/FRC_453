@@ -17,6 +17,10 @@ import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
@@ -27,6 +31,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * the project.
  */
 public class Robot extends TimedRobot {
+
+    private DigitalOutput colorSignal = new DigitalOutput(Constants.ClimberConstants.kAllianceSend);
 
     private Command m_autonomousCommand;
 
@@ -58,6 +64,13 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        Alliance alliance = DriverStation.getAlliance();
+        if(alliance == Alliance.Blue){
+            colorSignal.set(true);
+        }
+        else{
+            colorSignal.set(false);
+        }
     }
 
 
