@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
-import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.List;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -99,7 +98,7 @@ private final AutoDrive m_commandAutoDrive = new AutoDrive(m_limelight, m_drivet
   private void configureButtonBindings() {
 // Create some buttons
 
-/* final JoystickButton turboButton = new JoystickButton(driver, DriveConstants.kTurboButtonMap);        
+final JoystickButton turboButton = new JoystickButton(driver, DriveConstants.kTurboButtonMap);        
 turboButton.whenPressed( new RunCommand(
     () ->
         m_drivetrain.drive(
@@ -115,7 +114,25 @@ turboButton.whenReleased( new RunCommand(
             driver.getY(),
             -driver.getZ(),
             false, false), 
-            m_drivetrain) ,true); */
+            m_drivetrain) ,true);
+
+final JoystickButton fieldButton = new JoystickButton(driver, 2);        
+fieldButton.whenPressed( new RunCommand(
+    () ->
+        m_drivetrain.drive(
+            driver.getX(),
+            driver.getY(),
+            -driver.getZ(),
+            true, false), 
+            m_drivetrain) ,true);
+fieldButton.whenReleased( new RunCommand(
+    () ->
+        m_drivetrain.drive(
+            driver.getX(),
+            driver.getY(),
+            -driver.getZ(),
+            false, false), 
+            m_drivetrain) ,true);
 
 final JoystickButton autoButton = new JoystickButton(driver, OIConstants.k_DriverAutoButton);        
 autoButton.whenPressed(m_commandAutoDrive);
@@ -190,7 +207,7 @@ climberRetractButton.whenReleased(new RunCommand(
         m_climber.stopClimb(), 
             m_climber) ,true);
 
-/* final JoystickButton climberLowButton = new JoystickButton(driver, DriveConstants.kClimberUpMap);        
+final JoystickButton climberLowButton = new JoystickButton(driver, DriveConstants.kClimberUpMap);        
 climberLowButton.whenPressed(new RunCommand(
     () ->
         m_climber.lowBarClimb(), 
@@ -208,7 +225,7 @@ climberMedButton.whenPressed(new RunCommand(
 climberMedButton.whenReleased(new RunCommand(
     () ->
         m_climber.stopClimb(), 
-            m_climber) ,true); */
+            m_climber) ,true);
 
 final JoystickButton shootHighButton = new JoystickButton(operator, ShooterConstants.kHighGoalMap);        
 shootHighButton.whenPressed(new RunCommand(

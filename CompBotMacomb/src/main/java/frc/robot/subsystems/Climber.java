@@ -16,6 +16,7 @@ package frc.robot.subsystems;
 import frc.robot.commands.*;
 import frc.robot.Constants.*;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -39,7 +40,7 @@ public class Climber extends SubsystemBase {
 private WPI_TalonSRX climberMotor = new WPI_TalonSRX(ClimberConstants.kClimberMotorPort);
 private DigitalInput lowerLimit = new DigitalInput(2);
 private Encoder climbEncoder = new Encoder(3, 4, ClimberConstants.kReverseEncoder, EncodingType.k1X);
-
+private DigitalOutput goalMet = new DigitalOutput(6);
 
     public Climber() {
         climberMotor.configFactoryDefault();
@@ -59,6 +60,7 @@ private Encoder climbEncoder = new Encoder(3, 4, ClimberConstants.kReverseEncode
         if(lowerLimit.get() == false){
             climberMotor.set(ControlMode.PercentOutput, 0);
             climbEncoder.reset();
+            goalMet.set(true);
         }
     }
 
@@ -76,19 +78,23 @@ private Encoder climbEncoder = new Encoder(3, 4, ClimberConstants.kReverseEncode
     }
 
     public void lowBarClimb(){
+        goalMet.set(true);
         zeroClimber();
         while(climbEncoder.getRaw() < ClimberConstants.kLowBarTicks){
             climberMotor.set(ControlMode.PercentOutput, -ClimberConstants.climberSpeed);
         }
         climberMotor.set(ControlMode.PercentOutput, 0);
+        goalMet.set(false);
     }
 
     public void medBarClimb(){
+        goalMet.set(true);
         zeroClimber();
         while(climbEncoder.getRaw() < ClimberConstants.kMedBarTicks){
             climberMotor.set(ControlMode.PercentOutput, -ClimberConstants.climberSpeed);
         }
         climberMotor.set(ControlMode.PercentOutput, 0);
+        goalMet.set(false);
     }
 
     // Put methods for controlling this subsystem
