@@ -22,6 +22,8 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -37,10 +39,17 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Climber extends SubsystemBase {
 
 
+<<<<<<< Updated upstream
 private WPI_TalonSRX climberMotor = new WPI_TalonSRX(ClimberConstants.kClimberMotorPort);
 private DigitalInput lowerLimit = new DigitalInput(2);
 private Encoder climbEncoder = new Encoder(3, 4, ClimberConstants.kReverseEncoder, EncodingType.k1X);
 private DigitalOutput goalMet = new DigitalOutput(6);
+=======
+public WPI_TalonSRX climberMotor = new WPI_TalonSRX(ClimberConstants.kClimberMotorPort);
+public DigitalInput lowerLimit = new DigitalInput(2);
+public Encoder climbEncoder = new Encoder(3, 4, ClimberConstants.kReverseEncoder, EncodingType.k1X);
+public DigitalOutput goalMet = new DigitalOutput(6);
+>>>>>>> Stashed changes
 
     public Climber() {
         climberMotor.configFactoryDefault();
@@ -77,6 +86,7 @@ private DigitalOutput goalMet = new DigitalOutput(6);
         climberMotor.set(ControlMode.PercentOutput, 0);
     }
 
+<<<<<<< Updated upstream
     public void lowBarClimb(){
         goalMet.set(true);
         zeroClimber();
@@ -97,6 +107,8 @@ private DigitalOutput goalMet = new DigitalOutput(6);
         goalMet.set(false);
     }
 
+=======
+>>>>>>> Stashed changes
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void extendClimb(){

@@ -95,7 +95,7 @@ public class Constants {
         public static final int kLowGoalMap = 2;
         public static final int kLowGoalVal = 5500;
         public static final int kHighGoalMap = 1;
-        public static final int kHighGoalVal = 25000;
+        public static final int kHighGoalVal = 22000;
         public static final int kSliderFireMap = 4;
 	public static final int kSlotIdx = 0;
 	public static final int kPIDLoopIdx = 0;

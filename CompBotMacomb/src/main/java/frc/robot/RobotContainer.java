@@ -32,6 +32,7 @@ import edu.wpi.first.math.trajectory.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import frc.robot.commands.AutoClimb;
 
 public class RobotContainer {
 
@@ -50,6 +51,8 @@ private final Joystick operator = new Joystick(OIConstants.kOperatorControllerPo
 private final Joystick driver = new Joystick(OIConstants.kDriverControllerPort);
 
 private final AutoDrive m_commandAutoDrive = new AutoDrive(m_limelight, m_drivetrain);
+private final AutoClimb m_commandAutoClimbLow = new AutoClimb(m_drivetrain, m_climber, true);
+private final AutoClimb m_commandAutoClimbMid = new AutoClimb(m_drivetrain, m_climber, false);
 
   
   // A chooser for autonomous commands
@@ -208,20 +211,21 @@ climberRetractButton.whenReleased(new RunCommand(
             m_climber) ,true);
 
 final JoystickButton climberLowButton = new JoystickButton(driver, DriveConstants.kClimberUpMap);        
+<<<<<<< Updated upstream
 climberLowButton.whenPressed(new RunCommand(
     () ->
         m_climber.lowBarClimb(), 
             m_climber) ,true);
+=======
+climberLowButton.whileHeld(m_commandAutoClimbLow, true);
+>>>>>>> Stashed changes
 climberLowButton.whenReleased(new RunCommand(
     () ->
         m_climber.stopClimb(), 
             m_climber) ,true);
 
 final JoystickButton climberMedButton = new JoystickButton(driver, DriveConstants.kClimberDownMap);        
-climberMedButton.whenPressed(new RunCommand(
-    () ->
-        m_climber.medBarClimb(), 
-            m_climber) ,true);
+climberMedButton.whileHeld(m_commandAutoClimbMid, true);
 climberMedButton.whenReleased(new RunCommand(
     () ->
         m_climber.stopClimb(), 
@@ -247,7 +251,7 @@ final JoystickButton shootLowButton = new JoystickButton(operator, ShooterConsta
         m_shooter.stopShoot(), 
             m_shooter) ,true);
 
-/* final JoystickButton sliderFireButton = new JoystickButton(operator, ShooterConstants.kSliderFireMap);
+/*final JoystickButton sliderFireButton = new JoystickButton(operator, ShooterConstants.kSliderFireMap);
     sliderFireButton.whenPressed(new RunCommand(
     () ->
         m_shooter.sliderFire(),
@@ -256,8 +260,8 @@ final JoystickButton shootLowButton = new JoystickButton(operator, ShooterConsta
     () ->
         m_shooter.stopShoot(),
             m_shooter), true);
-} */
-  }
+            */
+}
 
 public Joystick getDriver() {
         return driver;
