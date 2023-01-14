@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Shooter;
 
 public class Drivetrain extends SubsystemBase {
@@ -76,6 +77,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        SmartDashboard.putNumber("IMU Val YAW", pigeonIMU.getYaw());
         m_odometry.update(Rotation2d.fromDegrees(
                 pigeonIMU.getFusedHeading()),
                 new MecanumDriveWheelSpeeds(
@@ -105,10 +107,10 @@ public class Drivetrain extends SubsystemBase {
         if (fieldRelative) {
             if (turboEn) {
                 m_drive.driveCartesian(ySpeed * turboSpeedMult, xSpeed * turboSpeedMult, rot * (turboSpeedMult / 2),
-                        -pigeonIMU.getYaw());
+                        pigeonIMU.getYaw());
             } else {
                 m_drive.driveCartesian(ySpeed * normalSpeedMult, xSpeed * normalSpeedMult, rot * (normalSpeedMult / 2),
-                        -pigeonIMU.getYaw());
+                        pigeonIMU.getYaw());
             }
         } else {
             if (turboEn) {
